@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
   private const string CLEAR_SCENE_NAME = "ClearScene";
   private const string GAME_SCENE_NAME = "GameScene";
 
+  private const string JUMP_TRIGGER_NAME = "JumpTrigger";
+
   void Start()
   {
     rigid2D = GetComponent<Rigidbody2D>();
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     // when player is on the cloud and pushed space key, player could jump.
     if (Input.GetMouseButtonDown(0) && rigid2D.velocity.y == 0)
     {
+      animator.SetTrigger(JUMP_TRIGGER_NAME);
       rigid2D.AddForce(transform.up * JUMP_FORCE);
     }
 
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour
       transform.localScale = new Vector3(xAxisMultiple, 1, 1);
     }
 
-    animator.speed = speedx / 2.0f;
+    animator.speed = rigid2D.velocity.y == 0 ? speedx / 2.0f : 1.0f;
   }
 
   void OnTriggerEnter2D(Collider2D other)
