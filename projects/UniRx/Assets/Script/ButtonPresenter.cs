@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using UniRx;
 
 public class ButtonPresenter : MonoBehaviour
@@ -25,7 +26,8 @@ public class ButtonPresenter : MonoBehaviour
             .Subscribe(_ => m_buttonModel.PushCount());
 
         m_buttonModel.PushCounter
-            .Subscribe(count => m_buttonText.text = count.ToString());
+            .Subscribe(count => m_buttonText.text = count.ToString())
+            .AddTo(gameObject);
     }
     private void Awake()
     {
