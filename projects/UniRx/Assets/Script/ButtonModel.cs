@@ -3,7 +3,7 @@ using UniRx;
 
 public sealed class ButtonModel
 {
-    public ReactiveProperty<int> PushCounter { get; private set; } = new ReactiveProperty<int>();
+    public IReactiveProperty<int> PushCounter { get; private set; } = new ReactiveProperty<int>();
 
     public ButtonModel()
     {
